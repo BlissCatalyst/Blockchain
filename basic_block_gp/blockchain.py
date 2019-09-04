@@ -79,7 +79,7 @@ class Blockchain(object):
         Simple Proof of Work Algorithm
         Find a number p such that hash(last_block_string, p) contains 6 leading
         zeroes
-        
+
         :return: <int> A valid proof
         """
 
@@ -90,7 +90,7 @@ class Blockchain(object):
         """
         Validates the Proof:  Does hash(last_block_string, proof) contain 6
         leading zeroes?
-        
+
         :param proof: <string> The proposed proof
         :return: <bool> Return true if the proof is valid, false if it is not
         """
@@ -182,6 +182,8 @@ def new_transaction():
 def full_chain():
     response = {
         # TODO: Return the chain and its current length
+        'chain': blockchain.chain,
+        'length': len(blockchain.chain)
     }
     return jsonify(response), 200
 
