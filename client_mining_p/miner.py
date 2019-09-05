@@ -6,32 +6,32 @@ import sys
 
 # TODO: Implement functionality to search for a proof
 def proof_of_work(self):
-        """
-        Simple Proof of Work Algorithm
-        Find a number p such that hash(last_block_string, p) contains 6 leading
-        zeroes
+    """
+    Simple Proof of Work Algorithm
+    Find a number p such that hash(last_block_string, p) contains 6 leading
+    zeroes
 
-        :return: <int> A valid proof
-        """
-        block_string = json.dumps(self.last_block, sort_keys=True).encode()
-        proof = 0
-        while not self.valid_proof(block_string, proof):
-            proof += 1
+    :return: <int> A valid proof
+    """
+    block_string = json.dumps(self.last_block, sort_keys=True).encode()
+    proof = 0
+    while not self.valid_proof(block_string, proof):
+        proof += 1
 
-        return proof
+    return proof
 
-    @staticmethod
-    def valid_proof(block_string, proof):
-        """
-        Validates the Proof:  Does hash(last_block_string, proof) contain 6
-        leading zeroes?
 
-        :param proof: <string> The proposed proof
-        :return: <bool> Return true if the proof is valid, false if it is not
-        """
-        guess = f'{block_string}{proof}'.encode()
-        guess_hash = hashlib.sha256(guess).hexdigest()
-        return guess_hash[:6] == "000000"
+def valid_proof(block_string, proof):
+    """
+    Validates the Proof:  Does hash(last_block_string, proof) contain 6
+    leading zeroes?
+
+    :param proof: <string> The proposed proof
+    :return: <bool> Return true if the proof is valid, false if it is not
+    """
+    guess = f'{block_string}{proof}'.encode()
+    guess_hash = hashlib.sha256(guess).hexdigest()
+    return guess_hash[:6] == "000000"
 
 
 if __name__ == '__main__':
