@@ -1,10 +1,29 @@
 import hashlib
 import requests
+import json
 
 import sys
 
 
-# TODO: Implement functionality to search for a proof 
+# TODO: Implement functionality to search for a proof
+def proof_of_work(last_block):
+    """
+    Simple Proof of Work Algorithm
+    Find a number p such that hash(last_block_string, p) contains 6 leading
+    zeroes
+
+    :return: <int> A valid proof
+    """
+    block_string = json.dumps(last_block, sort_keys=True).encode()
+    proof = 0
+    valid = False
+    while not valid:
+        guess = f'{block_string}{proof}'.encode()
+        guess_hash = hashlib.sha256(guess).hexdigest()
+        valid = guess_hash[:6] == "000000"
+        proof += 1
+
+    return proof
 
 
 if __name__ == '__main__':
